@@ -57,7 +57,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 @Override
                 public void onLocationChanged(Location location) {
                     //get the latitude
-                    double latitude = location.getLatitude();
+                    doub le latitude = location.getLatitude();
                     //get the longitude
                     double longitude = location.getLongitude();
                     //instantiate the class, LatLng
@@ -68,6 +68,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         String str = addressList.get(0).getLocality()+ "," + addressList.get(0).getCountryName();
                         mMap.addMarker(new MarkerOptions().position(latlng).title(str));
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 14.2f));
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
