@@ -20,6 +20,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -57,17 +58,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 @Override
                 public void onLocationChanged(Location location) {
                     //get the latitude
-                    doub le latitude = location.getLatitude();
+                    double latitude = location.getLatitude();
                     //get the longitude
                     double longitude = location.getLongitude();
                     //instantiate the class, LatLng
                     LatLng latlng = new LatLng(latitude,longitude);
                     Geocoder geocoder =new Geocoder(getApplicationContext());
+                    float zoom= 14.2f;
                     try {
                         List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
-                        String str = addressList.get(0).getLocality()+ "," + addressList.get(0).getCountryName();
+                        String str = addressList.get(0).getLocality() + "," + addressList.get(0).getCountryName();
                         mMap.addMarker(new MarkerOptions().position(latlng).title(str));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 14.2f));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, zoom));
+                        zoom=mMap.getMaxZoomLevel();
 
                     } catch (IOException e) {
                         e.printStackTrace();
